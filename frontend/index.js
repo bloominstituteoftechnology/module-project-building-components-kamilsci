@@ -105,15 +105,17 @@ function moduleProject3() {
   const footer = document.createElement('footer')
 
   let companyInfoDiv = document.createElement('div')
-  companyInfoDiv.classList.add('div')
+  companyInfoDiv.classList.add('company-info')
+
 
   let companyNameP = document.createElement('p')
-  companyNameP.classList('address')
- companyNameP.textContent = footerData.address
+  companyNameP.classList.add('company-name')
+ companyNameP.textContent = footerData.companyName
+ 
 
  let addressp = document.createElement('p')
- addressp.classList('contact-email')
-addressp.textContent = footerData.addressp
+ addressp.classList.add('address')
+addressp.textContent = footerData.address
 
 
 
@@ -125,8 +127,25 @@ addressp.textContent = footerData.addressp
  companyInfoDiv.appendChild(companyNameP)
  companyInfoDiv.appendChild (addressp)
  companyInfoDiv.appendChild (contactEmailP)
+
+ let socialMediaDiv = document.createElement('div')
+ socialMediaDiv.classList.add('social-media')
+
+ for(let platform in footerData.socialMedia){
+  let socialMediaLink = document.createElement('a')
+  socialMediaLink.href = footerData.socialMedia[platform ]
+  socialMediaLink.textContent = platform.charAt(0).toUpperCase() + platform.slice(1)
+  socialMediaDiv.appendChild(socialMediaLink)
+ }
+
+
+ let currentYear = new Date().getFullYear()
+ let copyRight = document.createElement('div') 
+ copyRight.textContent = `© ${footerData.companyName.toUpperCase()} ${currentYear}`  
  
  footer.appendChild(companyInfoDiv)
+ footer.appendChild(socialMediaDiv)
+ footer.appendChild(copyRight)
 
 
 
@@ -149,6 +168,17 @@ return footer
   }))
 
   // 👉 TASK 4 - Clicking on the section should deactivate the active card
+  document.addEventListener('click', evt =>{
+    if (evt.target === document.querySelector('section')){
+      const learners = document.querySelectorAll('.learner-card')
+      learners.forEach(card => card.classList.remove('active'))
+    }
+
+
+  }
+
+
+)
 
   //  ✨ do your magic here
 }
