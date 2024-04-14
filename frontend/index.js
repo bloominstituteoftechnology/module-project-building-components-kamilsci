@@ -10,7 +10,7 @@ function moduleProject3() {
       a.title = link.title
       a.textContent = link.textContent
       container.appendChild(a)
-      
+
     });
 
 
@@ -20,7 +20,7 @@ function moduleProject3() {
 
 
 
-   return container
+    return container
   }
 
   // ❗ DOM creation using your `buildNav` component (do not change):
@@ -40,23 +40,31 @@ function moduleProject3() {
 
     const nameP = document.createElement('p')
     nameP.textContent = learner.fullName
-    
+
     const idElement = document.createElement('p')
     idElement.textContent - `Learner ID: ${learner.id}`
-  
+
 
     const dobP = document.createElement('p')
     dobP.textContent = `Date of birth ${learner.dateOfBirth}`
 
-    
-    const favLangP  = document.createElement('p')
+
+    const favLangP = document.createElement('p')
     const favLanguage = languages.find(lang => lang.id === learner.favLanguage)
     favLangP.textContent = `Favorite Language: ${favLanguage.name}`;
 
     [nameP, idElement, dobP, favLangP].forEach(p => {
       container.appendChild(p)
     })
-
+    container.addEventListener('click', evt => {
+      document.querySelectorAll('.learner-card').forEach(container => {
+        container.classList.remove('active');
+      })
+      container.classList.add('active')
+    
+    })
+      
+    
 
     return container
 
@@ -69,7 +77,7 @@ function moduleProject3() {
       { id: 37, name: 'JavaScript', creator: 'Brendan Eich', year: 1995 },
       { id: 82, name: 'Python', creator: 'Guido van Rossum', year: 1991 },
       { id: 12, name: 'Java', creator: 'James Gosling', year: 1995 },
-      { id: 53, name: 'C#', creator: 'Microsoft Corporation', year: 2000 },  
+      { id: 53, name: 'C#', creator: 'Microsoft Corporation', year: 2000 },
       { id: 91, name: 'Ruby', creator: 'Yukihiro Matsumoto', year: 1995 }
     ]
     let learners = [
@@ -90,8 +98,42 @@ function moduleProject3() {
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
 
   function buildFooter(footerData) {
-    //  ✨ do your magic here
-    return document.createElement('footer')
+
+    
+
+
+  const footer = document.createElement('footer')
+
+  let companyInfoDiv = document.createElement('div')
+  companyInfoDiv.classList.add('div')
+
+  let companyNameP = document.createElement('p')
+  companyNameP.classList('address')
+ companyNameP.textContent = footerData.address
+
+ let addressp = document.createElement('p')
+ addressp.classList('contact-email')
+addressp.textContent = footerData.addressp
+
+
+
+ let contactEmailP = document.createElement('p')
+ contactEmailP.classList.add('contact-email')
+ contactEmailP.innerHTML = `Email: <a href="mailto:${footerData.contactEmail}"> ${footerData.contactEmail}</a>`
+
+ 
+ companyInfoDiv.appendChild(companyNameP)
+ companyInfoDiv.appendChild (addressp)
+ companyInfoDiv.appendChild (contactEmailP)
+ 
+ footer.appendChild(companyInfoDiv)
+
+
+
+return footer
+
+
+    
   }
 
   // ❗ DOM creation using your `buildFooter` component (do not change):
