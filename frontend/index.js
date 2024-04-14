@@ -3,8 +3,24 @@ function moduleProject3() {
   // 👉 TASK 1 - Write a `buildNav` component that returns a nav
 
   function buildNav(links) {
-    //  ✨ do your magic here
-    return document.createElement('nav')
+    const container = document.createElement('nav')
+    links.forEach(link => {
+      let a = document.createElement('a')
+      a.href = link.href
+      a.title = link.title
+      a.textContent = link.textContent
+      container.appendChild(a)
+      
+    });
+
+
+
+
+
+
+
+
+   return container
   }
 
   // ❗ DOM creation using your `buildNav` component (do not change):
@@ -19,7 +35,31 @@ function moduleProject3() {
   // 👉 TASK 2A - Write a `buildLearnerCard` component that returns a card
 
   function buildLearnerCard(learner, languages) {
-    //  ✨ do your magic here
+    const container = document.createElement('div')
+    container.classList.add('learner-card')
+
+    const nameP = document.createElement('p')
+    nameP.textContent = learner.fullName
+    
+    const idElement = document.createElement('p')
+    idElement.textContent - `Learner ID: ${learner.id}`
+  
+
+    const dobP = document.createElement('p')
+    dobP.textContent = `Date of birth ${learner.dateOfBirth}`
+
+    
+    const favLangP  = document.createElement('p')
+    const favLanguage = languages.find(lang => lang.id === learner.favLanguage)
+    favLangP.textContent = `Favorite Language: ${favLanguage.name}`;
+
+    [nameP, idElement, dobP, favLangP].forEach(p => {
+      container.appendChild(p)
+    })
+
+
+    return container
+
   }
 
   {
@@ -40,6 +80,11 @@ function moduleProject3() {
       { id: 17, fullName: 'Daniel Castillo', dateOfBirth: '1995-11-05', favLanguage: 12 }
     ]
     //  ✨ do your magic here
+
+    learners.forEach(learner => {
+      const learnerCard = buildLearnerCard(learner, languages)
+      document.querySelector('section').appendChild(learnerCard)
+    })
   }
 
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
